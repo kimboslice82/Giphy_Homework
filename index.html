@@ -2,19 +2,63 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>
-		
-	</title>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-	<script type="text/javascript">
-		
-
-
-		
-	</script>
+  <title>What's your drink</title>
 
 </head>
 <body>
+
+<div class="container">
+    <h1>Favorite Drink</h1>
+
+    <!-- Rendered buttons will get dumped Here  -->
+    <button data-search="michelob ultra" id="beer"> Michelob Ultra</button>
+    <button data-search="tequila" id="tequila">tequila</button>
+    <button data-search="jagermeister" id="jagermeister">Jagermeister</button>
+
+    <div id="buttons-view"></div>
+    <br>
+
+    <form id="drink-form">
+      <label for="drink-input">What are you drinking tonight?</label>
+      <input type="text" id="drink-input"><br>
+
+      <!-- Button triggers new movie to be added -->
+      <!--input id="add-drink" type="submit" value="What are you drinking"-->
+    </form>
+
+    <!-- Buttons will get dumped here -->
+    <div id="drinks-view"></div>
+
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript">
+    
+    $("button").on("click", function() {
+    	var x = $(this).data("search");
+    	console.log(x);
+
+    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + x + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+    $.ajax({
+    	url: queryURL,
+    	method:"GET",
+    	}).done(function(response) {
+    		console.log(response);
+
+    		$("body").append("<p> " + response.data[0].rating + "</p>");
+    		$("body").append("<img src='" + response.data[0].images.downsized.url+ " '>");
+    		// body...
+    	})
+
+
+    })
+    
+
+    //var drinks = ["michelob ultra", "tequila", "jagermeister"];
+
+
+
+
+    </script>
 
 </body>
 </html>
