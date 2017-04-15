@@ -46,13 +46,13 @@ $(document).ready(function(){
         createButtons();
     
 		//event listeners for buttons
-		$(document.body).on("click", displayGifs);
-    	//$(document.body).on('click','.giphy', runGiphy)
+		$(document.body).on("click", "button", displayGifs);
+    	//$(document.body).on('click','.giphy', playGifs)
 
         //this function grabs the data from the api
 		function displayGifs() {
 
-		var gifData = $(this).attr("#data-name");
+		var gifData = $(this).attr("data-name");
         //the URL to search the site and grab 10 results
 		var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifData + "&api_key=dc6zaTOxFJmzC&limit=10";
 
@@ -74,5 +74,24 @@ $(document).ready(function(){
     					}
     				})
         };
+    
+    /*function playGifs() {
+        
+        var gifs = $(this).attr("data-id");
+        //the URL to search the site and grab 10 results
+		var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifData + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+            //ajax function that gets a reponse from the site
+    	$.ajax({
+    		url: queryURL,
+    		method:"GET",
+    			}).done(function(response) {
+    				console.log(response);
+                        
+    					var animatedGif = response.data[i].images.downsized.url;
+                        
+            
+                         
+    }*/
 
 });
