@@ -47,7 +47,7 @@ $(document).ready(function(){
     
 		//event listeners for buttons
 		$(document.body).on("click", "button", displayGifs);
-    	$(document.body).on('click', playGifs)
+    	$(document.body).on("click", playGifs)
 
         //this function grabs the data from the api
 		function displayGifs() {
@@ -66,7 +66,7 @@ $(document).ready(function(){
     					for (var i = 0; i < response.data.length; i++) {
 
 						var rating = response.data[i].rating;
-    					var stillGif = response.data[i].images.fixed_height_still.url;
+    					var stillGif = response.data[i].images.original_still.url;
                         //displays the ratings and gifs on the page    
     					$("#gif-dump").prepend("<p> " + rating + "</p>");
     					$("#gif-dump").prepend("<img src='" + stillGif + " '>");
@@ -89,7 +89,7 @@ $(document).ready(function(){
     			}).done(function(response) {
     				console.log(response);
                         var results = response.data;
-    					var animatedGifLink = results.images.fixed_height.url;
+    					var animatedGifLink = results.images.downsized.url;
                         var animatedGif = $(that).find("img").attr("src", animatedGifLink);
                         
                         })
