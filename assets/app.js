@@ -47,7 +47,7 @@ $(document).ready(function(){
     
 		//event listeners for buttons
 		$(document.body).on("click", "button", displayGifs);
-    	//$(document.body).on('click','.giphy', playGifs)
+    	$(document.body).on('click', playGifs)
 
         //this function grabs the data from the api
 		function displayGifs() {
@@ -66,7 +66,7 @@ $(document).ready(function(){
     					for (var i = 0; i < response.data.length; i++) {
 
 						var rating = response.data[i].rating;
-    					var stillGif = response.data[i].images.original_still.url;
+    					var stillGif = response.data[i].images.fixed_height_still.url;
                         //displays the ratings and gifs on the page    
     					$("#gif-dump").prepend("<p> " + rating + "</p>");
     					$("#gif-dump").prepend("<img src='" + stillGif + " '>");
@@ -75,11 +75,12 @@ $(document).ready(function(){
     				})
         };
     
-    /*function playGifs() {
+    function playGifs() {
         
         var gifs = $(this).attr("data-id");
+        var that = this;
         //the URL to search the site and grab 10 results
-		var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifData + "&api_key=dc6zaTOxFJmzC&limit=10";
+		var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gifs + "&api_key=dc6zaTOxFJmzC&limit=10";
 
             //ajax function that gets a reponse from the site
     	$.ajax({
@@ -87,11 +88,15 @@ $(document).ready(function(){
     		method:"GET",
     			}).done(function(response) {
     				console.log(response);
+                        var results = response.data;
+    					var animatedGifLink = results.images.fixed_height.url;
+                        var animatedGif = $(that).find("img").attr("src", animatedGifLink);
                         
-    					var animatedGif = response.data[i].images.downsized.url;
+                        })
+                        }
                         
             
                          
-    }*/
+    
 
 });
